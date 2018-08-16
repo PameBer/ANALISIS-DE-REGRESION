@@ -1,0 +1,63 @@
+#EJERCICIO 1
+#CREACIÓN MATRIZ
+matriz<-(11:30)
+dim(matriz)<-c(4,5)
+matriz
+#NOMBRE DE RENGLONES Y COLUMNAS
+rownames(matriz)<-c("Toluca","Pachuca","Gdl","Mty")
+colnames(matriz)<-c("Escuela1","Escuela2","Escuela3","Escuela4","Escuela5")
+matriz
+#DATO DE ESCUELA 3 DE TOLUCA
+matriz["Toluca","Escuela3"]
+#ESCUELA 5 DE GDL
+matriz["Gdl","Escuela3"]
+#ESCUELA 1 DE PACHUCA
+matriz["Pachuca","Escuela1"]
+
+#EJERCICIO 2
+#CREACIÓN MATRIZ
+matriz_1<-matrix(nrow = 6,ncol = 3,1:18)
+matriz_1 
+#DATO DEL RENGLON 3 Y COLUMNA 3
+matriz_1[3,3]
+
+#EJERCICIO 3 COMPLETAR EL CÓDIGO
+s<-matrix(1:9,nrow = 3)
+s[,2]*s[,1]
+
+#EJERCICIO 4 COMPLETAR EL CODIGO
+a<-c("Pequeño","Largo","Enorme")
+b<-a!="Largo"
+a[b]
+
+#EJERCICIO 5
+#CREACIÓN DE VARIABLES
+Facultad<-c("Economía","Derecho","Arquitectura","Ingeniería")
+Licenciatura<-c("Actuaría","Derecho","Arquitectura","Ingeniería Mecánica")
+Calificación<-c(7,10,8,7)
+#CLASE DE LAS VARIABLES
+class(Facultad)
+class(Licenciatura)
+class(Calificación)
+#BORRAR VARIABLES FACULTAD Y CALIFICACION DEL ALUMNO 3
+Escuela<-data.frame(Facultad,Licenciatura,Calificación)
+Escuela[-3,]
+
+#EJERCCIO 6
+#CRECACIÓN DE LOS VECTORES
+Nombre<-c("Carlos","Juan","Raquel","Paty")
+Años<-c(32,35,43,25)
+Seg_Social<-c("IMMS","IMMS","ISSSTE","PRIVADO")
+Sit_Conyugal<-c("Casado","Soltero","Soltero","Unión Libre")
+Ocupación<-c("Contador","Carpintero","Profesora","Diseñador")
+#DATA FRAME DE LOS VECTORES
+Personas<-data.frame(Nombre,Años,Seg_Social,Sit_Conyugal,Ocupación)
+Personas
+#ENCONTRAR OCUPACION DE JUAN Y PATY
+Ocupación[c(2,4)]
+#SEGURIDAD SOCIAL DE RAQUEL Y CARLOS
+Seg_Social[c(3,1)]
+#Sit Conyuga
+Sit_Conyugal[c(4,2)]
+#SUMA DE LAS EDADES
+sum(Años)
