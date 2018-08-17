@@ -1,0 +1,45 @@
+#Ejercicio
+
+#Guardar los valores
+x<-c(.40,.42,.48,.51,.57,.60,.70,.75,.75,.78,.84,.95,.99,1.03,1.12,1.15,1.20,1.25,
+     1.25,1.28,1.30,1.34,1.37,1.40,1.43,1.46,1.49,1.55,1.58,1.60)
+y<-c(1.02,1.21,.88,.98,1.52,1.83,1.50,1.80,1.74,1.63,2.00,2.80,2.48,2.47,3.05,3.18,
+     3.76,3.68,3.82,3.21,4.27,3.12,3.99,3.75,4.10,4.18,3.77,4.34,4.21,4.92)
+
+#Hacer la tabla
+tabla<-data.frame(x,y)
+tabla
+
+help("dev.off")
+#Ejercicio 1: Hacer una gráfica de dispersión
+library(ggplot2)
+pdf("gráfica_1.pdf")
+ggplot(tabla, aes(x,y))+geom_point()+ggtitle("DIAGRAMA DE DISPERSIÓN")+
+    geom_smooth(method = lm)
+dev.off()
+###1. TIPO DE RALACION DE LA GRÁFICA: positiva
+###2. IDENTIFICAR OUTLIERS
+pdf("grafica_2.pdf")
+#Ordenamos los datos de mayor a menor distancia segun la metrica de Mahalanobis
+num.outliers<-2
+mah.ordenacion <- order(mahalanobis(tabla , colMeans(tabla), cov(tabla)), 
+                        decreasing=TRUE)
+outlier2<-rep(FALSE,nrow(tabla))
+x[outlier2]
+##Los valores que se encuentran mas alejados son en el eje x 1.30 y 1.34
+#que tienen las posiciones 21 y 22
+#Generamos un vector boleano de los dos valores mas alejados segun la distancia de Mahalanobis
+outlier2[mah.ordenacion[1:num.outliers]]<-TRUE
+#Colerear
+colorear.outlier<-outlier2*16
+plot(tabla, pch=0,main="Outliers")+points(tabla, pch=colorear.outlier)
+dev.off()
+###3. FUERZA DE LA RELACIÓN: alto
+###4. ELIMINAR OUTLIERS
+pdf("grafica_3.pdf")
+sin_outliers<-tabla[-c(21,22),]
+sin_outliers
+ggplot(sin_outliers, aes(x,y))+geom_point()+ggtitle("DIAGRAMA SIN OUTLIERS")+
+  geom_smooth(method = lm)
+dev.off()
+
