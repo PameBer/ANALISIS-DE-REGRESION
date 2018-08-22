@@ -1,0 +1,30 @@
+#####PRINCIPIO DE MÍNIMOS CUADRADADOS
+x<-c(132,129,120,113.2,105,92,84,83.2,88.4,59,80,81.5,71,69.2)
+y<-c(46,48,51,52.1,54,52,59,58.7,61.6,64,61.4,54.6,58.8,58)
+
+principio<-data.frame(x,y)
+
+##1
+#Obtener gráfica de dispersion y describirla
+ggplot(principio, aes(x,y))+geom_point()+ggtitle("DIAGRAMA DE DISPERSIÓN 1")
+##### Relación negativa y fuerza media
+
+##2
+#Calcular las estimaciones puntuales (B0,B1)
+mediax=mean(x)
+mediay=mean(y)
+
+numerador<-sum((x-mean(x))*(y-mean(y)))
+denominador<-sum((x-mean(x))*(x-mean(x)))
+
+b1=numerador/denominador
+b1
+
+b0=mediay-(b1*mediax)
+b0
+
+##3
+#Gráficar la recta con la gráfica de dispersión
+y1=b0+(b1*x)
+ggplot(principio, aes(x,y))+geom_point()+ggtitle("DIAGRAMA DE DISPERSIÓN 2")+
+  geom_line(aes(x,y1))
