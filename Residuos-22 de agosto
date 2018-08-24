@@ -1,0 +1,26 @@
+###RESIDUOS PRINCIPIO DE MÍNIMOS CUADRADOS
+x<- c(125.3,98.2,201.4,147.3,145.9,124.7,112.2,120.2,161.2,178.9,159.5,145.8,75.1,
+      151.4,144.2,125,198.8,132.5,159.6,110.7)
+y<- c(77.9,76.8,81.5,79.8,78.2,78.3,77.5,77.0,80.1,80.2,79.9,79,76.7,78.2,79.5,78.1,81.5,
+      77,79,78.6)
+
+#Calcular las estimaciones puntuales (B0,B1)
+mediax=mean(x)
+mediay=mean(y)
+
+numerador<-sum((x-mean(x))*(y-mean(y)))
+denominador<-sum((x-mean(x))*(x-mean(x)))
+
+b1=numerador/denominador
+b1
+
+b0=mediay-(b1*mediax)
+b0
+
+y1=b0+(b1*x)
+
+#Calcular los Residuos
+residuos<-(y-y1)
+residuos
+total_residuos<-sum(residuos)
+total_residuos
