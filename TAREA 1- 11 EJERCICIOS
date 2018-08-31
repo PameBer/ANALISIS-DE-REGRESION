@@ -1,0 +1,259 @@
+require(ggplot2)
+
+#####EJERCICIO 1#####
+x<-c(170,172,173,174,174,175,176,177,180,180,180,180,180,181,181,182,182,182,182,184,184,
+     185,186,188)
+y<-c(.84,1.31,1.42,1.03,1.07,1.08,1.04,1.80,1.45,1.60,1.61,2.13,2.15,.84,1.43,.90,1.81,1.94,
+     2.68,1.49,2.52,3.00,1.87,3.08)
+
+data1<-data.frame(x,y)
+data1
+
+### EJERCICIO 1 INCISO A:GRAFICO ###
+boxplot(x,main="RELACIÓN DE TEMPERATURA")
+median(x)
+#En la gráfica de la relación de temperatura podemos observar que no hay outliers, hay una mediana de 
+#180, la mayoría de las temperaturas registradas oscilan entre 176  y 183, aunque hay temperaturas bajas
+#de 170 y altas de 188. La mayoría de los datos se encuentran por debajo de la mediana.
+
+boxplot(y,main="RELACIÓN DE EFICIENCIA")
+median(y)
+#En la gráfica de la relación de eficiencia podemos observar que no hay outliers, hay una mediana de 1.55,
+#el nivel de eficiencia se encuentra entre 1 y 2, el nivel más bajo de eficiencia es de .8 aproximadamente y
+#no está tan alejado de los demás datos. por otro lado el dato más alto registrado en cuanto a eficiencia está
+#por encima de 3
+
+### EJERCICIO 1 INCISO B: RELACIÓN ###
+ggplot(data1, aes(x,y))+geom_point()+ggtitle("¿EXISTE RELACIÓN?")+xlab("Temperatura")+ylab("Eficiencia")
+#No existe relación entre la temperatura y el nivel de eficiencia porque graficamente no hay una relación
+#de que entre exista un valor más alto de x, va a hacer un valor más grande de y
+
+##EJERCICIO 1 INCISO C: DISPERSION
+ggplot(data1, aes(x,y))+geom_point()+ggtitle("GRÁFICA DE DISPERSIÓN")+xlab("Temperatura")+
+  ylab("Eficiencia")+geom_smooth(method = lm)
+#No se puede pronosticar la relacion de eficiencia mediante el valor de la temperatura porque se puede
+#observar que no hay una relación fuerte entre las variables
+
+##### EJERCICIO 2 #####
+edad<-c(0,0,2,11,7,16,9,0,12,4)
+lb<-c(1.72,4.38,4.06,1.26,5.31,.57,3.37,3.44,.74,1.24)
+r<-c(1.88,5.93,5.54,2.67,6.53,.74,4.94,4.89,.69,1.42)
+
+data2_1<-data.frame(edad,lb)
+data2_1
+
+data2_2<-data.frame(edad,r)
+data2_2
+
+ggplot(data2_1, aes(x=edad,y=lb))+geom_point()+ggtitle("DISPERSIÓN EMISIONES LÍNEA BASE")+
+  xlab("Edad")+ylab("Emisiones")+geom_smooth(method = lm)
+
+ggplot(data2_1, aes(x=edad,y=r))+geom_point()+ggtitle("DISPERSIÓN EMISIONES REFORMULADA")+
+  xlab("Edad")+ylab("Emisiones")+geom_smooth(method = lm)
+
+#Gráficamente se puede observar que entre mas años tiene el motor del auto, parece que arroja menos NO,
+#también parece ser que hay mayor liberación de NO por parte de los motores con la gasolina reformulada
+#que con la gasolina de línea base
+
+##### EJERCICIO 3 #####
+x3<-c(47,62,65,70,70,78,95,100,114,118,124,127,140,140,140,150,152,164,198,221)
+y3<-c(38,62,53,67,84,79,93,106,117,116,127,114,134,139,142,170,149,154,200,215)
+
+data3 <-data.frame(x3,y3)
+
+ggplot(data3, aes(x=x3,y=y3))+geom_point()+ggtitle("CONCENTRACIÓN DE HIDRÓGENO")+
+    xlab("Método de Cromatografía")+ylab("Método de Sensor")+geom_smooth(method = lm)
+cor(x3,y3)
+
+#Se puede observar que si hay una fuerte relación entre los dos tipos de mediciones, la cncentración que
+#ambos métodos arrojan es bastante similar y arrojan aproximadamente la misma cantidad,vemos también que 
+#hay pocos outliers que son los datos que más se alejan unos de otros
+
+##### EJERCICIO 4 #####
+x4<-c(5.8,8.8,11.0,13.6,18.5,21.0,23.7,26.0,28.3,31.9,36.5,38.2,40.4)
+y4<-c(7.8,8.2,6.9,5.3,4.7,4.9,4.3,2.7,2.8,1.8,1.9,1.1,.4)
+
+data4<-data.frame(x4,y4)
+data4
+
+ggplot(data4, aes(x=x4,y=y4))+geom_point()+ggtitle("CORRELACIÓN ENTRE LA CONCENTRACIÓN DE AMONIO 
+      Y LA TRANSPIRACIÓN DE LAS POBLACIONES DE PLANTAS")+xlab("Concentración de Amonio")+
+  ylab("Transpiración")
+
+#A simple vista en el gráfico podemos observar que las variables tienen una relacion fuerte y negativa, 
+#condiciones que hacen muy util aplicar el modelo se regresion lineal simple para el tratamiento
+#de los datos
+
+##### EJERCICIO 5 #####
+x5<-c(59,63,68,72,74,78,83)
+y5<-c(118,182,247,208,197,135,132)
+
+data5<-data.frame(x5,y5)
+data5
+
+##EJERCICIO 5 INCISO A: GRÁFICA 1 ###
+ggplot(data5, aes(x=x5,y=y5))+geom_point()+ggtitle("MOZZARELLA VS TEPERATURA")+xlab("Temperatura")+
+  ylab("Porcentaje de alargamiento")+scale_x_continuous(limits = c(0,100),
+                                                        breaks = c(0,20, 40, 60,80,100),
+                                                        label = c("0","20", "40", "60","80","100"))+
+                                     scale_y_continuous(limits = c(0,250),
+                                                        breaks = c(0,50,100,150,200,250),
+                                                        label = c("0","50", "100", "150","200","250"))
+
+##EJERCICIO 5 INCISO B: GRÁFICA 2 ###
+ggplot(data5, aes(x=x5,y=y5))+geom_point()+ggtitle("MOZZARELLA VS TEPERATURA")+xlab("Temperatura")+
+  ylab("Porcentaje de alargamiento")+scale_x_continuous(limits = c(55,85),
+                                                        breaks = c(55,65,75,85),
+                                                        label = c("55","65", "75", "85"))+
+                                     scale_y_continuous(limits = c(100,250),
+                                                        breaks = c(100,150,200,250), 
+                                                        label = c("100", "150","200","250")) 
+
+#Es mejor usar esta gráfica que la del inciso A porque es en esta gráfica donde podemos realmente ver
+#los resultados del estudio (solamente) y no un gran espacio en blanco en las temperaturas más bajas 
+#como en el primer gráfico
+
+##EJERCICIO 5 INCISO C
+#Los datos se ajustarían al modelo de una curva. Si existe una mayor temperatura el porcentaje de 
+#alargamiento del queso aumenta hasta que llega a un punto máximo, después de ese punto pasa lo
+#contrario el queso comienza a disminuir su elasticidad [porque se quema jeje]
+
+##### EJERCICIO 6 #####
+#Podemos observar en la grafica que existe  una relacion lineal entre la frecuencia de resonancia de la 
+#raqueta y la suma de la aceleración pico a pico, esta relación se comporta negativa;  también podemos 
+## identificar dos outliers que parecen no seguir la tendencia de las otras 21 raquetas ya que tienen
+#una frecuencia de resonancia muy alta y esto hace que la relacion no sea perfecta.
+
+##### EJERCICIO 7 #####
+#Y=1800+1.3x
+
+## EJERCICIO 7 INCISO A: RES. ACELERADA 2500 ##
+My2500<-1800+1.3*(2500)
+My2500
+
+## EJERCICIO 7 INCISO B: CAMBIO EN 1 ##
+#La misma pendiente B1=1.3
+B1=1.3
+B1
+
+## EJERCICIO 7 INCISO C: CAMBIO EN 100 ##
+#Cambio esperado: 100B1=130
+B1*100
+
+## EJERCICIO 7 INCISO D: REDUCCIÓN EN 100 ##
+#Cambio esperado: -100B1=-130
+B1*-100
+
+##### EJERCICIO 8 #####
+#Y=1800+1.3x
+#desv=350
+Des<-350
+
+## EJERCICIO 8 INCISO A: EXCEDA 5000 RES=2000 ##
+#Estandarizar P(Y>5000) --> P(Z>(5000-4400)/350) ---> P(Z>1.71)
+#Probabilidad de que el valor observado sea mayor que 5000 lb/pul.
+m<-pnorm(1.71,0,1) ## Sea inferior a 5000
+z<-1-m ## Complemento
+z
+
+## EJERCICIO 8 INCISO B: EXCEDA 5000 RES=2500 ##
+pnorm(.14,0,1)
+i<-1-pnorm(.14,0,1)
+i
+
+## EJERCICIO 8 INCISO C: SEGUNDA EXCEDA PRIMERA  ##
+#P(Z>(100-(5500-4400))/494.97)---->(P>.71)
+pnorm(.71,0,1)
+c<-1-pnorm(.71,0,1)
+c
+
+## EJERCICIO 8 INCISO C: PARA QUE PROB=.95  ##
+#Conocemos la desviacion estandar de Y2-Y1=494.97
+# Conocemos Medias de la siguiente manera M=1800-1.3x2-(1800-1.3x1)=1.3(x2-x1)
+
+##### EJERCICIO 9 #####
+#Y=-.12+0.095x
+
+## EJERCICIO 9 INCISO A: INCREMENTO EN 1  ##
+B1=0.095
+#Respuesta: 0.095
+#Explicación: El cambio esta dado por B1 que es la pendiente, esta indica el cambio en la velocidad 
+#de flujo asociado al incremento en una unidad de la variable caída de presion
+
+## EJERCICIO 9 INCISO B: REDUCCIÓN EN 5  ##
+B1*-5
+
+## EJERCICIO 9 INCISO C: cAÍDA DE PRESIÓN DE 10 Y 15  ##
+MY10<--.12+.095*(10)
+MY10
+
+MY15<--.12+.095*(15)
+MY15
+
+## EJERCICIO 9 INCISO D: PR. EXCEDA .835 Y .84  ##
+#P[Y>.835]=P[Z>(.835-.830)/025]---->P[Z>.20]
+f<-1-pnorm(.20,0,1)
+f
+
+## P[Y>.840]=P[Z>(.840-.830)/025]---->P[Z>.40]
+f1<-1-pnorm(.40,0,1)
+f1
+
+## EJERCICIO 9 INCISO E: CUANDO ES 10 EXCEDA A CUANDO ES 11  ##
+MY11<--.12+.095*(11) ##Cuando es 11
+MY11
+
+#V(Y1-Y2)=V(Y1)+V(Y2)=VAR_TOTAL
+#DESVIACION = RAIZ(VAR_TOTAL)
+#P(Y1>Y2)=P(Y1-Y2>0)=P(Z>.095/.035355)-->P(Z>2.69)
+f2<-1-pnorm(2.69,0,1)
+f2
+
+##### EJERCICIO 10 #####
+#Sacamos los valores esperados de x=1000 y x=2000
+M.1000<-4000+10*(1000)
+M.1000
+
+M.2000<-4000+10*(2000)
+M.2000
+
+#Dos casos con 5500 Y 6500
+#P[z>5500-M.1000/D.estandar?]=.05 y ""=.10
+#obteniendo -850/destandar=-1.65 & -17500/destandar=-1.28
+#Al despejar ese valor que es el de la desviacion estandar no es el indicado que cumple la condicion 
+#inicial
+
+##### EJERCICIO 11 ###
+#y=5.00-.01x
+des=0.075
+B1=-0.01
+
+## EJERCICIO 11 INCISO A: INCREMENTO EN 1 y en 10  ##
+B1*1
+B1*10
+
+## EJERCICIO 11 INCISO B:TIEMPO CUANDO 200 Y 250  ##
+mY200<-5.00-.01*(200)
+mY200
+
+mY250<-5.00-.01*(250)
+mY250
+
+## EJERCICIO 11 INCISO C:PROB ENTRE 2.4 Y 2.6  ##
+#Calcular la probabilidad para una observación
+#P(2.4<Z<2.6)
+#P[(2.4-2.5/.075)<Z<(2.6-2.5/.075)]
+#P[-1.33<Z<1.33]
+
+t<-(pnorm(1.33,0,1)-pnorm(-1.33,0,1))
+t
+
+t^5
+
+## EJERCICIO 11 INCISO D:MÁS ALTA EXCEDA MÁS BAJA ##
+#Para que la probabilidad sea mayor 5.00-.01(x+1)-(5.00-.01x)=0.1
+#La desviación de Y1-Y2 es:
+sqrt((des^2)+(des^2))
+#P(Y1-Y2>0)=P(Z>-(-.01)/0.106066)=P(Z>0.09)
+g<-(pnorm(0.09,0,1))
+g
